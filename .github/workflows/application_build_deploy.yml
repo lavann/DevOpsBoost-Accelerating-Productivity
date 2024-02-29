@@ -1,6 +1,8 @@
 env:
     registryName: b4qludaj7ktqsmpnpreg.azurecr.io
-    repositoryName: 
+    repositoryName: lavann/devproductivity
+    dockerFolderPath: Application/src/RazorPagesTestSample
+    tag: ${{github.run_number}}
 
 
 name: .NET Core
@@ -27,3 +29,12 @@ jobs:
       run: dotnet build --no-restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
     - name: Test
       run: dotnet test --no-build --verbosity normal ./Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj
+
+  docker-image-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Docker Build
+        uses: docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerFolderPath
+      - name: Docker Push
+        uses: docker push $registryName/$repositoryName:$tag
