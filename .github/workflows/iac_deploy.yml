@@ -3,6 +3,7 @@ name: Provision Azure Resources from Bicep template using openID Connect
 permissions:
   id-token: write
   contents: read
+  pages: write
 jobs:
     provision-resources:
         runs-on: ubuntu-latest
@@ -23,7 +24,7 @@ jobs:
               with:
                 subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID  }}
                 resourceGroupName: ${{ secrets.AZURE_RG  }}
-                template: ./main.bicep
+                template: ./InfrastructureAsCode/main.bicep
                 parameters: environment=$
 
 
