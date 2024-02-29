@@ -5,13 +5,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout the repository
-              uses: actions/checkout@main            
-            - uses: azure/login@v1 #login to Azure                
-              with:
-                client-id: ${{ secrets.AZURE_CLIENT_ID  }}
-                tenant-id: ${{ secrets.AZURE_TENANT_ID  }}
-                subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID  }}
-                enable-AzPSSession: true #using oidc to login to azure and value should be set to true
+              uses: actions/checkout@main
+            - name: Log into Azure              
+              uses: azure/login@v1 #login to Azure                
+                with:
+                  client-id: ${{ secrets.AZURE_CLIENT_ID  }}
+                  tenant-id: ${{ secrets.AZURE_TENANT_ID  }}
+                  subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID  }}
+                  enable-AzPSSession: true #using oidc to login to azure and value should be set to true
             
             - name: Deploy the bicep template
               uses: azure/arm-deploy@v1
