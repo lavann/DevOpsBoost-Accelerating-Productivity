@@ -1,8 +1,5 @@
 name: first-workflow
-on:
-  push:
-    branches:
-      - main
+on: [workflow_dispatch]
 jobs:
     Explore-Github-Actions:
         runs-on: ubuntu-latest
