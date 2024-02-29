@@ -5,9 +5,9 @@ param environment string = 'dev'
 param location string = resourceGroup().location
 
 var webAppName = '${uniqueString(resourceGroup().id)}-${environment}'
-var appServicePlanName = '${uniqueString(resourceGroup().id)}-mpnp-asp'
-var logAnalyticsName = '${uniqueString(resourceGroup().id)}-mpnp-la'
-var appInsightsName = '${uniqueString(resourceGroup().id)}-mpnp-ai'
+var appServicePlanName = '${uniqueString(resourceGroup().id)}-mpnp-asp-${environment}'
+var logAnalyticsName = '${uniqueString(resourceGroup().id)}-mpnp-la-${environment}'
+var appInsightsName = '${uniqueString(resourceGroup().id)}-mpnp-ai-${environment}'
 var sku = 'S1'
 var registryName = '${uniqueString(resourceGroup().id)}mpnpreg'
 var registrySku = 'Standard'
