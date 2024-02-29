@@ -3,8 +3,7 @@ name: Provision Azure Resources from Bicep template using openID Connect
 jobs:
     provision-resources:
         runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@main #checkout main branch
+        steps:            
             - uses: azure/login@v1 #login to Azure                
               with:
                 client-id: ${{ secrets.AZURE_CLIENT_ID  }}
@@ -15,9 +14,10 @@ jobs:
             - name: Deploy the bicep template
               uses: azure/arm-deploy@v1
               with:
-                subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID  }}
-                resourceGroupName: ${{ secrets.AZURE_RG }}
+                subscriptionId: $
+                resourceGroupName: $
                 template: ./main.bicep
+                parameters: environment=$
 
 
 
