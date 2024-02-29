@@ -7,24 +7,20 @@ name: .NET Core
 
 on:
   push:
-    branches: [ $default-branch ]    
+    branches: [ main ]
+    paths: Application/**
   pull_request:
-    branches: [ $default-branch ]
-  
-
+    branches: [ main ]
+    paths: Application/**
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:  
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Application/**
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
     - name: Install dependencies #use relative path to application
       run: dotnet restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
     - name: Build
