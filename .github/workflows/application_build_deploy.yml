@@ -1,0 +1,33 @@
+env:
+    registryName: b4qludaj7ktqsmpnpreg.azurecr.io
+    repositoryName: 
+
+
+name: .NET Core
+
+on:
+  push:
+    branches: [ $default-branch ]    
+  pull_request:
+    branches: [ $default-branch ]
+  
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Application/**
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Install dependencies #use relative path to application
+      run: dotnet restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+    - name: Build
+      run: dotnet build --no-restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+    - name: Test
+      run: dotnet test --no-build --verbosity normal ./Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj
