@@ -3,7 +3,9 @@ name: Provision Azure Resources from Bicep template using openID Connect
 jobs:
     provision-resources:
         runs-on: ubuntu-latest
-        steps:            
+        steps:
+            - name: Checkout the repository
+              uses: actions/checkout@main            
             - uses: azure/login@v1 #login to Azure                
               with:
                 client-id: ${{ secrets.AZURE_CLIENT_ID  }}
